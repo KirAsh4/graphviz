@@ -1,25 +1,53 @@
 digraph home_network {
-	rankdir=TB;
-	node[shape=record];
-	fontname="Arial";
-	splines="line";
+	rankdir=TB
+	node[shape=record]
+	splines="line"
+	fontname="Myriad Pro"
+	fontsize="16"
 
 	internet [
-		shape=ellipse;
-		style=filled;
-		fillcolor=lightblue;
-		label=<<table border="0">
-					<tr><td port="port1">Ye Olde Internet</td></tr>
-				</table>>
+		shape=ellipse
+		style=filled
+		fillcolor=lightblue
+		label="Ye Olde Internet"
+		fontname="Myriad Pro"
+		fontsize="16"
 	]
 
-	publicrouter [label="WAN Router", shape=ellipse];
-	edgerouter [label="Edge Router", shape=rect];
-	edgeswitch [label="Edge Switch\n(wired)", shape=rect];
-	unifiap [label="UniFi AP\n(wireless)", shape=circle];
+	publicrouter [
+		shape=ellipse
+		label="WAN Router"
+		fontname="Myriad Pro"
+		fontsize="14"
+	]
+
+	edgerouter [
+		shape=rect
+		label="Edge Router"
+		fontname="Myriad Pro"
+		fontsize="14"
+		height="0.2"
+		peripheries=2
+	]
+
+	edgeswitch [
+		shape=rect
+		label="Edge Switch\n(wired)"
+		fontname="Myriad Pro"
+		fontsize="12"
+	]
+
+	unifiap [
+		shape=circle
+		label="UniFi AP\n(wireless)"
+		fontname="Myriad Pro"
+		fontsize="12"
+		height="0.80"
+		fixedsize=true
+	]
 
 	win10 [
-		shape=none;
+		shape=none
 		label=<<table border="0" cellspacing="0">
 					<tr><td port="port1" border="1">Windows 10</td></tr>
 					<tr><td port="port2" border="1">Mounts Raspberry Pi's<br />
@@ -29,10 +57,10 @@ digraph home_network {
 					<tr><td port="port4" border="1">Chrome browser launches<br />
 																MagicMirror from Raspberry Pi</td></tr>
 				</table>>
-	];
+	]
 
 	raspberrypi [
-		shape=none;
+		shape=none
 		label=<<table border="0" cellspacing="0">
 					<tr><td port="port1" border="1">Raspberry Pi</td></tr>
 					<tr><td port="port2" border="1">Exports MagicMirror folder<br />
@@ -42,18 +70,18 @@ digraph home_network {
 					<tr><td port="port4" border="1">Displays MagicMirror on<br />
 																attached monitor (behind mirror)</td></tr>
 				</table>>
-	];
+	]
 
 	{rank=same; edgeswitch unifiap}
 	{rank=same; win10 raspberrypi}
 
-	raspberrypi:port2 -> win10:port2;
-	win10:port3 -> raspberrypi:port2 [dir=both color="red:blue" arrowTyle="normal"];
-	raspberrypi:port3 -> win10:port4;
+	raspberrypi:port2 -> win10:port2
+	raspberrypi:port3 -> win10:port4
+	win10:port3 -> raspberrypi:port2 [dir=both color="red:blue"]
 
-	internet -> publicrouter -> edgerouter;
-	edgerouter -> edgeswitch;
-	edgerouter -> unifiap;
-	edgeswitch -> win10;
-	unifiap -> raspberrypi;
+	internet -> publicrouter -> edgerouter
+	edgerouter -> edgeswitch
+	edgerouter -> unifiap
+	edgeswitch -> win10
+	unifiap -> raspberrypi
 }

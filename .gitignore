@@ -5,3 +5,6 @@
 *.tiff
 *.tiff
 *.svg
+
+# Documents
+*.pdf
