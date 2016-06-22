@@ -1,0 +1,59 @@
+digraph home_network {
+	rankdir=TB;
+	node[shape=record];
+	fontname="Arial";
+	splines="line";
+
+	internet [
+		shape=ellipse;
+		style=filled;
+		fillcolor=lightblue;
+		label=<<table border="0">
+					<tr><td port="port1">Ye Olde Internet</td></tr>
+				</table>>
+	]
+
+	publicrouter [label="WAN Router", shape=ellipse];
+	edgerouter [label="Edge Router", shape=rect];
+	edgeswitch [label="Edge Switch\n(wired)", shape=rect];
+	unifiap [label="UniFi AP\n(wireless)", shape=circle];
+
+	win10 [
+		shape=none;
+		label=<<table border="0" cellspacing="0">
+					<tr><td port="port1" border="1">Windows 10</td></tr>
+					<tr><td port="port2" border="1">Mounts Raspberry Pi's<br />
+																"github" folder through Samba</td></tr>
+					<tr><td port="port3" border="1">Edits files directly from<br />
+																Raspberry Pi</td></tr>
+					<tr><td port="port4" border="1">Chrome browser launches<br />
+																MagicMirror from Raspberry Pi</td></tr>
+				</table>>
+	];
+
+	raspberrypi [
+		shape=none;
+		label=<<table border="0" cellspacing="0">
+					<tr><td port="port1" border="1">Raspberry Pi</td></tr>
+					<tr><td port="port2" border="1">Exports MagicMirror folder<br />
+																through Samba</td></tr>
+					<tr><td port="port3" border="1">Serves MagicMirror process<br />
+																through configured port</td></tr>
+					<tr><td port="port4" border="1">Displays MagicMirror on<br />
+																attached monitor (behind mirror)</td></tr>
+				</table>>
+	];
+
+	{rank=same; edgeswitch unifiap}
+	{rank=same; win10 raspberrypi}
+
+	raspberrypi:port2 -> win10:port2;
+	win10:port3 -> raspberrypi:port2 [dir=both color="red:blue" arrowTyle="normal"];
+	raspberrypi:port3 -> win10:port4;
+
+	internet -> publicrouter -> edgerouter;
+	edgerouter -> edgeswitch;
+	edgerouter -> unifiap;
+	edgeswitch -> win10;
+	unifiap -> raspberrypi;
+}
