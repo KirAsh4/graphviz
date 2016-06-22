@@ -1,0 +1,30 @@
+graph home_network {
+	rankdir=LR;
+	subgraph cluster_0 {
+		label = "Public Network";
+		internet [label="Ye Olde Internet", color=Blue, style=filled, fillcolor=blue, fontcolor=yellow, fontsize=20, shape=ellipse];
+		publicrouter [label="WAN Router", shape=ellipse];
+	}
+
+	subgraph cluster_1 {
+		label = "Internal Private Network";
+		edgerouter [label="Edge Router", shape=rect];
+		subgraph cluster_2 {
+			label = "Wired";
+			edge [color=blue, style=dashed];
+			edgeswitch [label="Edge Switch", shape=rect];
+			win10 [label="Windows 10", shape=rect];
+		}
+		subgraph cluster_3 {
+			label = "Wireless";
+			unifiap [label="UniFi AP", shape=circle];
+			raspberrypi [label="Raspberry Pi", shape=rect];
+		}
+	}
+
+	internet -- publicrouter -- edgerouter;
+	edgerouter -- edgeswitch;
+	edgerouter -- unifiap;
+	edgeswitch -- win10;
+	unifiap -- raspberrypi;
+}
