@@ -1,30 +1,198 @@
-graph home_network {
-	rankdir=LR;
-	subgraph cluster_0 {
-		label = "Public Network";
-		internet [label="Ye Olde Internet", color=Blue, style=filled, fillcolor=blue, fontcolor=yellow, fontsize=20, shape=ellipse];
-		publicrouter [label="WAN Router", shape=ellipse];
-	}
+digraph home_network {
+	rankdir=TB;
+
+	internet [
+		label="Ye Olde Internet"
+		color=Blue
+		style=filled
+		fillcolor=blue
+		fontname="Myriad Pro"
+		fontsize=16
+		fontcolor=yellow
+		fontsize=20
+		shape=ellipse
+	];
+	publicrouter [
+		label="WAN Router"
+		shape=ellipse
+		fontname="Myriad Pro"
+		fontsize=14
+		height=0.25
+	];
 
 	subgraph cluster_1 {
-		label = "Internal Private Network";
-		edgerouter [label="Edge Router", shape=rect];
+		style=invis;
+		edgerouter [
+			label="Edge Router"
+			shape=rect
+			fontname="Myriad Pro"
+			fontsize=14
+			height=0.25
+		];
 		subgraph cluster_2 {
-			label = "Wired";
-			edge [color=blue, style=dashed];
-			edgeswitch [label="Edge Switch", shape=rect];
-			win10 [label="Windows 10", shape=rect];
+			style=invis;
+			edgeswitch [
+				label="Edge Switch\n(wired)"
+				shape=rect
+				fontname="Myriad Pro"
+				fontsize=12
+				height=0.25
+			];
+			win10 [
+				label="Windows 10"
+				shape=rect
+				fontname="Myriad Pro"
+				fontsize=12
+				height=0.25
+			];
+			Apps [
+				shape=none
+				label=<<table border="0" cellspacing="0" cellborder="1" cellpadding="4">
+					<tr><td colspan="4" bgcolor="turquoise2" port="title"><b>Applications</b></td></tr>
+					<tr><td port="git">Git<br />for Windows</td>
+					<td port="notepad">Notepad++<br />Editor</td>
+					<td port="chrome">Chrome<br />Browser</td>
+					<td port="scrt">SecureCRT<br />Terminal</td></tr>
+				</table>>
+				fontname="Myriad Pro"
+				fontsize=12
+			];
+			NetDrive [
+				shape=none
+				label=<<table border="0" cellspacing="0" cellborder="1" cellpadding="4">
+					<tr><td bgcolor="orange" port="title"><b>Mapped 'Network Drive'</b></td></tr>
+					<tr><td>X:\ maps to rpi:~pi/GitHub</td></tr>
+				</table>>
+				fontname="Myriad Pro"
+				fontsize=12
+			];
 		}
 		subgraph cluster_3 {
-			label = "Wireless";
-			unifiap [label="UniFi AP", shape=circle];
-			raspberrypi [label="Raspberry Pi", shape=rect];
+			style=invis;
+			unifiap [
+				label="UniFi AP\n(wireless)"
+				shape=circle
+				fontname="Myriad Pro"
+				fontsize=12
+				fixedsize=true
+				height=0.85
+				peripheries=2
+			];
+			raspberrypi [
+				label="Raspberry Pi"
+				shape=rect
+				fontname="Myriad Pro"
+				fontsize=12
+				height=0.25
+			];
+		}
+		subgraph cluster_4 {
+			style="invis";
+			rpimonitor [
+				label="Raspberry Pi\nMonitor/Mirror"
+				shape="rect"
+				fontname="Myriad Pro"
+				fontsize=12
+				height=0.25
+			]
+			electron [
+				shape="record"
+				label="Electron\nBrowser"
+				fontname="Myriad Pro"
+				fontsize=12
+				height=0.25
+			]
 		}
 	}
 
-	internet -- publicrouter -- edgerouter;
-	edgerouter -- edgeswitch;
-	edgerouter -- unifiap;
-	edgeswitch -- win10;
-	unifiap -- raspberrypi;
+	internet -> publicrouter -> edgerouter [dir=none];
+	edgerouter -> {edgeswitch unifiap} [dir=none];
+	edgeswitch -> win10 [dir=none];
+	unifiap -> raspberrypi [dir=none];
+
+
+	MagicMirror [
+		shape=none
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="title" bgcolor="#90f090"><b>MagicMirror</b></td></tr>
+			<tr><td port="path" align="left"><b>PATH=</b> ~pi/GitHub/MagicMirror</td></tr>
+			<tr><td align="left" balign="left"><b>origin=</b>github.com/KirAsh4/MagicMirror<br /><b>upstream=</b>github.com/MichMich/MagicMirror</td></tr>
+		</table>>
+		fontname="Myriad Pro"
+		fontsize=12
+	]
+	MonthlyCal [
+		shape=none
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="title" bgcolor="#90f090"><b>calendar_monthly</b></td></tr>
+			<tr><td port="path"><b>PATH=</b> ~pi/GitHub/MagicMirror/modules/calendar_monthly</td></tr>
+			<tr><td align="left"><b>origin=</b>github.com/KirAsh4/calendar_monthly</td></tr>
+		</table>>
+		fontname="Myriad Pro"
+		fontsize=12
+	]
+	RandomQ [
+		shape=none
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="title" bgcolor="#90f090"><b>random_quotes</b></td></tr>
+			<tr><td port="path"><b>PATH=</b> ~pi/GitHub/MagicMirror/modules/random_quotes</td></tr>
+			<tr><td align="left"><b>origin=</b> github.com/KirAsh4/random_quotes</td></tr>
+		</table>>
+		fontname="Myriad Pro"
+		fontsize=12
+	]
+	MMProcess [
+		shape=none
+		label=<<table border="0" cellspacing="0" cellborder="1" cellpadding="4">
+			<tr><td port="title" bgcolor="grey20"><font color="white"><b>MagicMirror Process</b></font></td></tr>
+			<tr><td>on http://rpi:8585</td></tr>
+		</table>>
+		fontname="Myriad Pro"
+		fontsize=12
+	]
+	GitRepo [
+		shape=none
+		label=<<table border="0" cellspacing="0" cellborder="1" cellpadding="4">
+			<tr><td port="title" bgcolor="lightblue1"><b>Git Repository</b></td></tr>
+			<tr><td bgcolor="palegreen2"><b>PATH=</b> ~pi/GitHub</td></tr>
+		</table>>
+		fontname="Myriad Pro"
+		fontsize=12
+	]
+
+	Processes [
+		shape=none
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td bgcolor="orchid1" port="title" colspan="4"><b>Processes</b></td></tr>
+			<tr><td port="ssh" bgcolor="gold2">SSH</td>
+			<td port="samba" bgcolor="firebrick2"><font color="white">Samba</font></td>
+			<td bgcolor="lightblue1" port="git">Git</td>
+			<td bgcolor="forestgreen" port="npm"><font color="white">npm</font></td></tr>
+		</table>>
+		fontname="Myriad Pro"
+		fontsize=12
+	]
+
+	raspberrypi:e -> rpimonitor:w
+	Processes:npm:e -> electron:w
+	electron:n -> rpimonitor:s
+	raspberrypi -> Processes:title:n [dir=none]
+	GitRepo -> Processes:samba [color="lightblue4"]
+	Processes:git -> GitRepo [color="lightblue4"]
+	Processes:npm -> MMProcess [color="forestgreen"]
+	Apps:scrt:_ -> Processes:ssh:_ [dir=both color="gold4"]
+	GitRepo -> {MagicMirror MonthlyCal RandomQ} [color="palegreen3"]
+
+	win10 -> NetDrive
+	Processes:samba:_ -> NetDrive:_ [color="firebrick3:orange" dir=both]
+
+	win10 -> Apps [dir=none]
+	NetDrive:_ -> Apps:git [color="orange"]
+	NetDrive:_ -> Apps:notepad [color="orange"]
+	MMProcess:n -> Apps:chrome [color="grey20"]
+
+	{rank=same edgeswitch unifiap}
+	{rank=same win10 raspberrypi rpimonitor}
+	{rank=same Apps Processes electron}
+	{rank=same NetDrive GitRepo}
 }
