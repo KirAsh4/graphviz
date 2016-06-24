@@ -110,7 +110,6 @@ digraph home_network {
 	edgeswitch -> win10 [dir=none];
 	unifiap -> raspberrypi [dir=none];
 
-
 	MagicMirror [
 		shape=none
 		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">

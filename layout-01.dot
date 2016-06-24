@@ -1,0 +1,296 @@
+/**
+** Diagram representing the Simulator Engine
+**/
+digraph G {
+        graph [
+            rankdir = "TB"
+        ];
+
+        /**
+        ** The simulator engine rectangle
+        **/
+    subgraph cluster_simulator_engine {
+        style=filled;
+        color=lightgrey;
+        node [style=filled,color=white];
+        label = "Simulator Engine";
+
+                /**
+                ** The first topology
+                **/
+                subgraph cluster_T1 {
+                        color=white;
+                        node [style=filled];
+
+                        /**
+                        ** The n^th neuron
+                        **/
+                        subgraph cluster_T1_N3 {
+                                color=lightgrey;
+                                node [style=filled];
+                                label = "Neuron n";
+
+                                /**
+                                ** The n^th synapse 
+                                **/
+                                "T1_N3_S3" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse n"
+                                ];
+
+                                /**
+                                ** The second synapse 
+                                **/
+                                "T1_N3_S2" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 2"
+                                ];
+
+                                /**
+                                ** The first synapse 
+                                **/
+                                "T1_N3_S1" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 1"
+                                ];
+
+                                "T1_N3_S1" -> "T1_N3_S2" [style=invis];
+                                "T1_N3_S2" -> "T1_N3_S3" [style=invis];
+                        }
+
+                        /**
+                        ** The second neuron
+                        **/
+                        subgraph cluster_T1_N2 {
+                                color=lightgrey;
+                                node [style=filled];
+                                label = "Neuron 2";
+
+                                /**
+                                ** The n^th synapse 
+                                **/
+                                "T1_N2_S3" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse n"
+                                ];
+
+                                /**
+                                ** The second synapse 
+                                **/
+                                "T1_N2_S2" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 2"
+                                ];
+
+                                /**
+                                ** The first synapse 
+                                **/
+                                "T1_N2_S1" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 1"
+                                ];
+
+                                "T1_N2_S2" -> "T1_N2_S3" [style=invis];
+                                "T1_N2_S1" -> "T1_N2_S2" [style=invis];
+                        }
+
+
+                        /**
+                        ** The third neuron
+                        **/
+                        subgraph cluster_T1_N1 {
+                                color=lightgrey;
+                                node [style=filled];
+                                label = "Neuron 1";
+
+                                /**
+                                ** The n^th synapse 
+                                **/
+                                "T1_N1_S3" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse n"
+                                ];
+
+                                /**
+                                ** The second synapse 
+                                **/
+                                "T1_N1_S2" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 2"
+                                ];
+
+                                /**
+                                ** The first synapse 
+                                **/
+                                "T1_N1_S1" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 1"
+                                ];
+
+                                "T1_N1_S1" -> "T1_N1_S2" [style=invis];
+                                "T1_N1_S2" -> "T1_N1_S3" [style=invis];
+                        }
+
+
+                        label = "Topology 1";
+                }
+
+                /**
+                ** The second topology
+                **/
+                subgraph cluster_T2 {
+                        color=white;
+                        node [style=filled];
+
+                        /**
+                        ** The n^th neuron
+                        **/
+                        subgraph cluster_T2_N3 {
+                                color=lightgrey;
+                                node [style=filled];
+                                label = "Neuron n";
+
+                                /**
+                                ** The n^th synapse 
+                                **/
+                                "T2_N3_S3" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse n"
+                                ];
+
+                                /**
+                                ** The second synapse 
+                                **/
+                                "T2_N3_S2" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 2"
+                                ];
+
+                                /**
+                                ** The first synapse 
+                                **/
+                                "T2_N3_S1" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 1"
+                                ];
+
+                                "T2_N3_S1" -> "T2_N3_S2" [style=invis];
+                                "T2_N3_S2" -> "T2_N3_S3" [style=invis];
+                        }
+
+                        /**
+                        ** The second neuron
+                        **/
+                        subgraph cluster_T2_N2 {
+                                color=lightgrey;
+                                node [style=filled];
+                                label = "Neuron 2";
+
+                                /**
+                                ** The n^th synapse 
+                                **/
+                                "T2_N2_S3" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse n"
+                                ];
+
+                                /**
+                                ** The second synapse 
+                                **/
+                                "T2_N2_S2" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 2"
+                                ];
+
+                                /**
+                                ** The first synapse 
+                                **/
+                                "T2_N2_S1" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 1"
+                                ];
+
+                                "T2_N2_S1" -> "T2_N2_S2" [style=invis];
+                                "T2_N2_S2" -> "T2_N2_S3" [style=invis];
+                        }
+
+
+                        /**
+                        ** The third neuron
+                        **/
+                        subgraph cluster_T2_N1 {
+                                color=lightgrey;
+                                node [style=filled];
+                                label = "Neuron 1";
+
+                                /**
+                                ** The n^th synapse 
+                                **/
+                                "T2_N1_S3" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse n"
+                                ];
+
+                                /**
+                                ** The second synapse 
+                                **/
+                                "T2_N1_S2" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 2"
+                                ];
+
+                                /**
+                                ** The first synapse 
+                                **/
+                                "T2_N1_S1" [
+                                    style=filled
+                                    shape=box
+                                    color=white
+                                    label="Synapse 1"
+                                ];
+
+                                "T2_N1_S1" -> "T2_N1_S2" [style=invis];
+                                "T2_N1_S2" -> "T2_N1_S3" [style=invis];
+                        }
+
+
+                        label = "Topology 2";
+                }
+
+    }
+
+}

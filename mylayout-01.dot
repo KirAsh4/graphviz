@@ -1,0 +1,73 @@
+digraph network_layout {
+	graph [
+		rankdir = "TB";
+	];
+
+subgraph cluster_main {
+	subgraph cluster_nas {
+		style = "invis";
+		label = "NAS Devices";
+		node [
+			shape = "rect";
+			fontname = "Myriad Pro";
+			fontsize = 12;
+			height = 0.25;
+		]
+		MyBook1 [
+			label = "NAS 01";
+		]
+		MyBook2 [
+			label = "NAS 02";
+		]
+		MyBook3 [
+			label = "NAS 03";
+		]
+		MyBook4 [
+			label = "NAS 04";
+		]
+		MyCloud1 [
+			label = "NAS 05";
+		]
+
+		MyBook1 -> MyBook2 -> MyBook3 -> MyBook4 -> MyCloud1 [style="invis"];
+	}
+
+	subgraph cluster_external {
+		style = "invis";
+		label = "External Connection";
+		Internet [
+			shape = "ellipse";
+			label = "Ye Olde Internet"
+		]
+		WAN [
+			shape = "ellipse";
+			label = "WAN Router";
+		]
+
+		Internet -> WAN [dir=none];
+	}
+
+	subgraph cluster_internal {
+		style = "invis";
+		label = "Internal";
+		node [
+			shape = "rect";
+			fontname = "Myriad Pro";
+			fontsize = 12;
+			height = 0.25;
+		]
+		EdgeRouter [
+			label = "Edge Router";
+		]
+		EdgeSwitch [
+			label = "Edge Switch";
+		]
+
+		EdgeRouter -> EdgeSwitch;
+	}
+
+	WAN -> EdgeRouter [dir=none];
+}
+
+/*EdgeSwitch:w -> {MyBook1 MyBook2 MyBook3 MyBook4 MyCloud1}*/
+}
