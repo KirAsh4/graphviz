@@ -1,0 +1,52 @@
+digraph phone_menu {
+	rankdir = "LR";
+
+	node [
+		shape = "record";
+		fontname = "Myriad Pro";
+		fontsize = "14";
+		height = "0.25";
+	];
+
+	Recordings [
+		label = "Recordings Menu\nPress *60 on any phone";
+	];
+
+	DayTimeRecording [
+		label = "1 - Day Time Greeting\n(daytime.wav)";
+	];
+
+	NightTimeRecording [
+		label = "2 - Night Time Greeting\n(nighttime.wav)";
+	];
+
+	SalesRepMenu [
+		label = "3 - Sales Reps Menu\n(submenu1.wav)";
+	];
+
+	AdminMenu [
+		label = "4 - Administration Menu\n(submenu2.wav)";
+	];
+
+	BPPMenu [
+		label = "5 - Boulder Pro Photo Menu\n(prophoto.wav)";
+	];
+
+	Entry [
+		label = "6 - Entry?\n(entry.wav)";
+	];
+
+	ChangeRecordings [
+		label = "9 - Recordings Menu\nTHIS MENU\n(recordings.wav)";
+	];
+
+	DayTimeMenu [
+		label = "Day Time Menu";
+	];
+
+	{rank=same DayTimeRecording NightTimeRecording SalesRepMenu AdminMenu BPPMenu Entry ChangeRecordings};
+
+	Recordings -> {DayTimeRecording NightTimeRecording SalesRepMenu AdminMenu BPPMenu Entry ChangeRecordings};
+
+	DayTimeRecording -> DayTimeMenu
+}
