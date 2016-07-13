@@ -1,52 +1,126 @@
 digraph phone_menu {
 	rankdir = "LR";
+	size = "18,12";
+	ranksep = "1.5";
 
 	node [
 		shape = "record";
 		fontname = "Myriad Pro";
-		fontsize = "14";
+		fontsize = "11";
 		height = "0.25";
 	];
+
+
+	Start [
+		label = "Start";
+		shape = "Mdiamond";
+	]
+
+	DayTimeMenu [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
+			<tr><td port="MainMenu" bgcolor="blue" colspan="2"><b><font color="#ffffff">Main Menu (daytime.wav)</font></b></td></tr>
+			<tr><td port="timeout" bgcolor="lightblue">timeout</td><td align="left" port="timeout1" bgcolor="lightblue">Repeats Menu</td></tr>
+			<tr><td port="invalid" bgcolor="lightblue">invalid</td><td align="left" port="invalid1" bgcolor="lightblue">Repeats Menu</td></tr>
+			<tr><td port="2">2</td><td align="left" port="21">Customer Service Group (ext 250)</td></tr>
+			<tr><td port="3" bgcolor="palegreen">3</td><td align="left" port="31" bgcolor="palegreen">Sales Rep Menu</td></tr>
+			<tr><td port="4" bgcolor="plum">4</td><td align="left" port="41" bgcolor="plum">Administration Menu</td></tr>
+			<tr><td port="5" bgcolor="moccasin">5</td><td align="left" port="51" bgcolor="moccasin">Transfers to BPP (ext 165)</td></tr>
+			<tr><td port="6">6</td><td align="left" port="61">Transfers to Rosario Custom Framing (ext 104)</td></tr>
+			<tr><td port="8">8</td><td align="left" port="81">Transfers to Front Counter (ext 111)</td></tr>
+			<tr><td port="9" bgcolor="lightblue">9</td><td align="left" port="91" bgcolor="lightblue">Repeats Menu</td></tr>
+			<tr><td port="#">#</td><td align="left" port="#1">Configuration</td></tr>
+			<tr><td port="1??">1??</td><td align="left" port="1??1">Dials Specific Extension</td></tr>
+			<tr><td port="*70">*70</td><td align="left" port="*701">Voicemail</td></tr>
+			</table>>;
+	];
+
+	SalesRepMenu [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
+			<tr><td port="SalesMenu" bgcolor="darkgreen" colspan="2"><b><font color="#ffffff">Sales Reps Menu (submenu1.wav)</font></b></td></tr>
+			<tr><td port="timeout" bgcolor="palegreen">timeout</td><td align="left" port="timeout1" bgcolor="palegreen">Repeats Menu</td></tr>
+			<tr><td port="invalid" bgcolor="palegreen">invalid</td><td align="left" port="invalid1" bgcolor="palegreen">Repeats Menu</td></tr>
+			<tr><td port="1">1</td><td align="left" port="11">Transfers to Chuck (ext 107)</td></tr>
+			<tr><td port="2">2</td><td align="left" port="21">Transfers to Jen (ext 117)</td></tr>
+			<tr><td port="3">3</td><td align="left" port="31">Transfers to Claire (ext 120)</td></tr>
+			<tr><td port="4">4</td><td align="left" port="41">Transfers to Kristina (ext 118)</td></tr>
+			<tr><td port="5">5</td><td align="left" port="51">Transfers to Roy (ext 101)</td></tr>
+			<tr><td port="6">6</td><td align="left" port="61">Transfers to Ron (ext 103)</td></tr>
+			<tr><td port="7">7</td><td align="left" port="71">Transfers to Rosario Custom Framing (ext 104)</td></tr>
+			<tr><td port="9" bgcolor="palegreen">9</td><td align="left" port="91" bgcolor="palegreen">Repeats Menu</td></tr>
+			<tr><td port="0" bgcolor="lightblue">0</td><td align="left" port="01" bgcolor="lightblue">Main Menu</td></tr>
+			</table>>;
+	];
+	edge [color=blue];
+	SalesRepMenu:0 -> DayTimeMenu:MainMenu;
+
+	AdminMenu [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
+			<tr><td port="AdminMenu" bgcolor="purple" colspan="2"><b><font color="#ffffff">Administration Menu (submenu2.wav)</font></b></td></tr>
+			<tr><td port="timeout" bgcolor="plum">timeout</td><td align="left" port="timeout1" bgcolor="plum">Repeats Menu</td></tr>
+			<tr><td port="invalid" bgcolor="plum">invalid</td><td align="left" port="invalid1" bgcolor="plum">Repeats Menu</td></tr>
+			<tr><td port="1">1</td><td align="left" port="11">Transfers to Roy (ext 101)</td></tr>
+			<tr><td port="2">2</td><td align="left" port="21">Transfers to Terri (ext 102)</td></tr>
+			<tr><td port="3">3</td><td align="left" port="31">Transfers to Ron (ext 103)</td></tr>
+			<tr><td port="9" bgcolor="plum">9</td><td align="left" port="91" bgcolor="plum">Repeats Menu</td></tr>
+			<tr><td port="0" bgcolor="lightblue">0</td><td align="left" port="01" bgcolor="lightblue">Main Menu</td></tr>
+			</table>>;
+	];
+	edge [color=blue];
+	AdminMenu:0 -> DayTimeMenu:MainMenu
+
+	BPPMenu [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
+			<tr><td port="BPPMenu" bgcolor="orange" colspan="2"><b><font color="#333333">BPP Menu (prophoto.wav)</font></b></td></tr>
+			<tr><td port="timeout" bgcolor="moccasin">timeout</td><td align="left" port="timeout1" bgcolor="moccasin">Transfers to Paula (ext 160)</td></tr>
+			<tr><td port="1">1</td><td align="left" port="11">Transfers to Paula (ext 160)</td></tr>
+			<tr><td port="2">2</td><td align="left" port="21">Transfers to Derek (ext 161)</td></tr>
+			<tr><td port="0" bgcolor="moccasin">0</td><td align="left" port="01" bgcolor="moccasin">Repeats Menu (ext 165)</td></tr>
+			</table>>;
+	];
+
+	edge [color=black];
+	Start:e -> DayTimeMenu:MainMenu;
+	edge [color="darkgreen"];
+	DayTimeMenu:31:e -> SalesRepMenu:SalesMenu;
+	edge [color="purple"];
+	DayTimeMenu:41:e -> AdminMenu:AdminMenu;
+	edge [color="orange"];
+	DayTimeMenu:51:e -> BPPMenu:BPPMenu;
+
+	{rank=same SalesRepMenu AdminMenu BPPMenu}
 
 	Recordings [
 		label = "Recordings Menu\nPress *60 on any phone";
 	];
 
-	DayTimeRecording [
-		label = "1 - Day Time Greeting\n(daytime.wav)";
-	];
+	RecordingsOptions [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
+			<tr><td port="1">1</td><td align="left">Day Time Greeting (daytime.wav)</td></tr>
+			<tr><td port="2">2</td><td align="left">Night Time Greeting (nighttime.wav)</td></tr>
+			<tr><td port="3">3</td><td align="left">Sales Reps Menu (submenu1.wav)</td></tr>
+			<tr><td port="4">4</td><td align="left">Administration Menu (submenu2.wav)</td></tr>
+			<tr><td port="5">5</td><td align="left">Boulder Pro Photo Menu (prophoto.wav)</td></tr>
+			<tr><td port="6">6</td><td align="left">Entry? (entry.wav)</td></tr>
+			<tr><td port="9">9</td><td align="left">THIS Recordings Menu (recordings.wav)</td></tr>
+			</table>>;
+	]
+	edge [color="black"];
+	Recordings:e -> RecordingsOptions:1;
+	Recordings:e -> RecordingsOptions:2;
+	Recordings:e -> RecordingsOptions:3;
+	Recordings:e -> RecordingsOptions:4;
+	Recordings:e -> RecordingsOptions:5;
+	Recordings:e -> RecordingsOptions:6;
+	Recordings:e -> RecordingsOptions:9;
 
-	NightTimeRecording [
-		label = "2 - Night Time Greeting\n(nighttime.wav)";
-	];
-
-	SalesRepMenu [
-		label = "3 - Sales Reps Menu\n(submenu1.wav)";
-	];
-
-	AdminMenu [
-		label = "4 - Administration Menu\n(submenu2.wav)";
-	];
-
-	BPPMenu [
-		label = "5 - Boulder Pro Photo Menu\n(prophoto.wav)";
-	];
-
-	Entry [
-		label = "6 - Entry?\n(entry.wav)";
-	];
-
-	ChangeRecordings [
-		label = "9 - Recordings Menu\nTHIS MENU\n(recordings.wav)";
-	];
-
-	DayTimeMenu [
-		label = "Day Time Menu";
-	];
-
-	{rank=same DayTimeRecording NightTimeRecording SalesRepMenu AdminMenu BPPMenu Entry ChangeRecordings};
-
-	Recordings -> {DayTimeRecording NightTimeRecording SalesRepMenu AdminMenu BPPMenu Entry ChangeRecordings};
-
-	DayTimeRecording -> DayTimeMenu
 }

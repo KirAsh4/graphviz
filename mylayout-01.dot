@@ -1,73 +1,34 @@
-digraph network_layout {
+digraph G {
+
 	graph [
-		rankdir = "TB";
-	];
+		splines = "false";
+	]
 
-subgraph cluster_main {
-	subgraph cluster_nas {
+	subgraph cluster_0 {
 		style = "invis";
-		label = "NAS Devices";
-		node [
-			shape = "rect";
-			fontname = "Myriad Pro";
-			fontsize = 12;
-			height = 0.25;
-		]
-		MyBook1 [
-			label = "NAS 01";
-		]
-		MyBook2 [
-			label = "NAS 02";
-		]
-		MyBook3 [
-			label = "NAS 03";
-		]
-		MyBook4 [
-			label = "NAS 04";
-		]
-		MyCloud1 [
-			label = "NAS 05";
-		]
-
-		MyBook1 -> MyBook2 -> MyBook3 -> MyBook4 -> MyCloud1 [style="invis"];
+		node [shape = "box" height = "0.25"];
+		"NAS 01" -> "NAS 02" -> "NAS 03" -> "NAS 04" -> "NAS 05" [style = "invis"];
+		label = "process #1";
 	}
 
-	subgraph cluster_external {
-		style = "invis";
-		label = "External Connection";
-		Internet [
-			shape = "ellipse";
-			label = "Ye Olde Internet"
-		]
-		WAN [
-			shape = "ellipse";
-			label = "WAN Router";
-		]
-
-		Internet -> WAN [dir=none];
+	subgraph cluster_1 {
+		node [style=filled];
+		b0 -> b1 -> EdgeSwitch -> b3;
+		label = "process #2";
+		color=blue
 	}
+	start -> "NAS 01";
+	start -> b0;
+	EdgeSwitch -> "NAS 01";
+	EdgeSwitch -> "NAS 02";
+	EdgeSwitch -> "NAS 03";
+	EdgeSwitch -> "NAS 04";
+	EdgeSwitch -> "NAS 05";
+	"NAS 05" -> end;
+	b3 -> end;
 
-	subgraph cluster_internal {
-		style = "invis";
-		label = "Internal";
-		node [
-			shape = "rect";
-			fontname = "Myriad Pro";
-			fontsize = 12;
-			height = 0.25;
-		]
-		EdgeRouter [
-			label = "Edge Router";
-		]
-		EdgeSwitch [
-			label = "Edge Switch";
-		]
+	{rank=same EdgeSwitch "NAS 03"}
 
-		EdgeRouter -> EdgeSwitch;
-	}
-
-	WAN -> EdgeRouter [dir=none];
-}
-
-/*EdgeSwitch:w -> {MyBook1 MyBook2 MyBook3 MyBook4 MyCloud1}*/
+	start [shape=Mdiamond];
+	end [shape=Msquare];
 }
