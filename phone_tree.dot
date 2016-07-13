@@ -1,7 +1,7 @@
 digraph phone_menu {
 	rankdir = "LR";
-	size = "18,12";
-	ranksep = "1.5";
+	page = "18,12";
+	ranksep = "1";
 
 	node [
 		shape = "record";
@@ -11,36 +11,62 @@ digraph phone_menu {
 	];
 
 
-	Start [
-		label = "Start";
+	StartPCI [
+		label = <<b>PCI<br/>Incoming<br/>Call</b>>;
 		shape = "Mdiamond";
-	]
+	];
+
+	StartBPP [
+		label = <<b>BPP<br/>Incoming<br/>Call</b>>;
+		shape = "Mdiamond";
+	];
+
+	Attendant [
+		shape = "none";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td bgcolor="red3" port="title"><font color="white"><b>Automated Attendant</b></font></td></tr>
+			<tr><td port="daytime" bgcolor="burlywood"><b>Working Hours</b><br/>9:00 AM - 5:30 PM<br />MON - FRI</td></tr>
+			<tr><td port="nighttime" bgcolor="khaki1">Night Time and Weekends</td></tr>
+			</table>>;
+	];
 
 	DayTimeMenu [
 		shape = "none";
 		margin = "0";
-		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
-			<tr><td port="MainMenu" bgcolor="blue" colspan="2"><b><font color="#ffffff">Main Menu (daytime.wav)</font></b></td></tr>
-			<tr><td port="timeout" bgcolor="lightblue">timeout</td><td align="left" port="timeout1" bgcolor="lightblue">Repeats Menu</td></tr>
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="MainMenu" bgcolor="blue" colspan="2"><b><font color="white">Day Time Menu (daytime.wav)</font></b></td></tr>
+			<tr><td port="timeout">timeout</td><td align="left" port="timeout1">Transfers to Generic Voicemail (ext 200)</td></tr>
 			<tr><td port="invalid" bgcolor="lightblue">invalid</td><td align="left" port="invalid1" bgcolor="lightblue">Repeats Menu</td></tr>
-			<tr><td port="2">2</td><td align="left" port="21">Customer Service Group (ext 250)</td></tr>
+			<tr><td port="2" bgcolor="lightcyan">2</td><td align="left" port="21" bgcolor="lightcyan">Customer Service Group <b>(Hunt Group 250)</b></td></tr>
 			<tr><td port="3" bgcolor="palegreen">3</td><td align="left" port="31" bgcolor="palegreen">Sales Rep Menu</td></tr>
 			<tr><td port="4" bgcolor="plum">4</td><td align="left" port="41" bgcolor="plum">Administration Menu</td></tr>
-			<tr><td port="5" bgcolor="moccasin">5</td><td align="left" port="51" bgcolor="moccasin">Transfers to BPP (ext 165)</td></tr>
+			<tr><td port="5" bgcolor="moccasin">5</td><td align="left" port="51" bgcolor="moccasin">Transfers to BPP <b>(Hunt Group 165)</b></td></tr>
 			<tr><td port="6">6</td><td align="left" port="61">Transfers to Rosario Custom Framing (ext 104)</td></tr>
 			<tr><td port="8">8</td><td align="left" port="81">Transfers to Front Counter (ext 111)</td></tr>
 			<tr><td port="9" bgcolor="lightblue">9</td><td align="left" port="91" bgcolor="lightblue">Repeats Menu</td></tr>
-			<tr><td port="#">#</td><td align="left" port="#1">Configuration</td></tr>
+			<tr><td port="#">#</td><td align="left" port="#1">Configuration Menu</td></tr>
 			<tr><td port="1??">1??</td><td align="left" port="1??1">Dials Specific Extension</td></tr>
 			<tr><td port="*70">*70</td><td align="left" port="*701">Voicemail</td></tr>
+			</table>>;
+	];
+
+	NightTimeMenu [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="NightMenu" bgcolor="yellow" colspan="2"><b>Night Time Menu (nighttime.wav)</b></td></tr>
+			<tr><td port="timeout">timeout</td><td align="left" port="timeout0">Transfers to Generic Mailbox (ext 200)</td></tr>
+			<tr><td port="invalid" bgcolor="khaki1">invalid</td><td align="left" port="invalid0" bgcolor="khaki1">Repeats Menu</td></tr>
+			<tr><td port="#">#</td><td align="left" port="#0">Configuration Menu</td></tr>
+			<tr><td port="1??">1??</td><td align="left" port="1??0">Dials Specific Extension</td></tr>
 			</table>>;
 	];
 
 	SalesRepMenu [
 		shape = "none";
 		margin = "0";
-		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
-			<tr><td port="SalesMenu" bgcolor="darkgreen" colspan="2"><b><font color="#ffffff">Sales Reps Menu (submenu1.wav)</font></b></td></tr>
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="SalesMenu" bgcolor="darkgreen" colspan="2"><b><font color="white">Sales Reps Menu (submenu1.wav)</font></b></td></tr>
 			<tr><td port="timeout" bgcolor="palegreen">timeout</td><td align="left" port="timeout1" bgcolor="palegreen">Repeats Menu</td></tr>
 			<tr><td port="invalid" bgcolor="palegreen">invalid</td><td align="left" port="invalid1" bgcolor="palegreen">Repeats Menu</td></tr>
 			<tr><td port="1">1</td><td align="left" port="11">Transfers to Chuck (ext 107)</td></tr>
@@ -60,8 +86,8 @@ digraph phone_menu {
 	AdminMenu [
 		shape = "none";
 		margin = "0";
-		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
-			<tr><td port="AdminMenu" bgcolor="purple" colspan="2"><b><font color="#ffffff">Administration Menu (submenu2.wav)</font></b></td></tr>
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="AdminMenu" bgcolor="purple" colspan="2"><b><font color="white">Administration Menu (submenu2.wav)</font></b></td></tr>
 			<tr><td port="timeout" bgcolor="plum">timeout</td><td align="left" port="timeout1" bgcolor="plum">Repeats Menu</td></tr>
 			<tr><td port="invalid" bgcolor="plum">invalid</td><td align="left" port="invalid1" bgcolor="plum">Repeats Menu</td></tr>
 			<tr><td port="1">1</td><td align="left" port="11">Transfers to Roy (ext 101)</td></tr>
@@ -72,30 +98,74 @@ digraph phone_menu {
 			</table>>;
 	];
 	edge [color=blue];
-	AdminMenu:0 -> DayTimeMenu:MainMenu
+	AdminMenu:0 -> DayTimeMenu:MainMenu;
+
+	HuntGroup165 [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td colspan="2" port="title" bgcolor="orange"><b>Hunt Group 165<br/>Rings extensions:</b></td></tr>
+			<tr><td>160</td><td align="left">Paula</td></tr>
+			<tr><td>161</td><td align="left">Tim</td></tr>
+			<tr><td>111</td><td align="left">Front Counter</td></tr>
+			<tr><td>105</td><td align="left">Front Counter</td></tr>
+			<tr><td port="timeout" bgcolor="moccasin">-</td><td align="left" port="timeout0" bgcolor="moccasin">timeout</td></tr>
+			</table>>;
+	];
 
 	BPPMenu [
 		shape = "none";
 		margin = "0";
-		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
-			<tr><td port="BPPMenu" bgcolor="orange" colspan="2"><b><font color="#333333">BPP Menu (prophoto.wav)</font></b></td></tr>
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="BPPMenu" bgcolor="orange" colspan="2"><b><font color="black">BPP Menu (prophoto.wav)</font></b></td></tr>
 			<tr><td port="timeout" bgcolor="moccasin">timeout</td><td align="left" port="timeout1" bgcolor="moccasin">Transfers to Paula (ext 160)</td></tr>
 			<tr><td port="1">1</td><td align="left" port="11">Transfers to Paula (ext 160)</td></tr>
-			<tr><td port="2">2</td><td align="left" port="21">Transfers to Derek (ext 161)</td></tr>
-			<tr><td port="0" bgcolor="moccasin">0</td><td align="left" port="01" bgcolor="moccasin">Repeats Menu (ext 165)</td></tr>
+			<tr><td port="2">2</td><td align="left" port="21">Transfers to Tim (ext 161)</td></tr>
+			<tr><td port="0" bgcolor="moccasin">0</td><td align="left" port="01" bgcolor="moccasin">Repeats Menu <b>(Hunt Group 165)</b></td></tr>
 			</table>>;
 	];
 
-	edge [color=black];
-	Start:e -> DayTimeMenu:MainMenu;
-	edge [color="darkgreen"];
-	DayTimeMenu:31:e -> SalesRepMenu:SalesMenu;
-	edge [color="purple"];
-	DayTimeMenu:41:e -> AdminMenu:AdminMenu;
-	edge [color="orange"];
-	DayTimeMenu:51:e -> BPPMenu:BPPMenu;
+	HuntGroup200 [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td colspan="2" port="title" bgcolor="darkgoldenrod"><font color="white"><b>Hunt Group 200<br/>Rings extensions:</b></font></td></tr>
+			<tr><td>160</td><td align="left">Paula</td></tr>
+			<tr><td>161</td><td align="left">Tim</td></tr>
+			<tr><td>111</td><td align="left">Front Counter</td></tr>
+			<tr><td>105</td><td align="left">Front Counter</td></tr>
+			<tr><td port="timeout" bgcolor="lightblue">-</td><td align="left" port="timeout0" bgcolor="lightblue">timeout</td></tr>
+			</table>>;
+	];
 
-	{rank=same SalesRepMenu AdminMenu BPPMenu}
+	HuntGroup250 [
+		shape = "none";
+		margin = "0";
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td colspan="2" port="title" bgcolor="deepskyblue"><b>Hunt Group 250<br/>Rings extensions:</b></td></tr>
+			<tr><td>161</td><td align="left">Tim</td></tr>
+			<tr><td>111</td><td align="left">Front Counter</td></tr>
+			<tr><td port="timeout" bgcolor="lightcyan">-</td><td align="left" port="timeout0" bgcolor="lightcyan">timeout</td></tr>
+			</table>>;
+	];
+
+	StartPCI:e -> Attendant:w [color=black];
+	StartBPP:e ->BPPMenu:BPPMenu [color=black];
+	Attendant:daytime:e -> HuntGroup200:title:w [color=black];
+	HuntGroup200:timeout0:e -> DayTimeMenu:MainMenu [color="blue"];
+	Attendant:nighttime:e -> NightTimeMenu:NightMenu [color="blue"];
+	DayTimeMenu:31:e -> SalesRepMenu:SalesMenu [color="darkgreen"];
+	DayTimeMenu:41:e -> AdminMenu:AdminMenu [color="purple"];
+	DayTimeMenu:21:e -> HuntGroup250:title:e [color="deepskyblue"];
+	HuntGroup250:timeout:w -> Attendant:title:e [color="red" style="dotted"];
+	DayTimeMenu:51:e -> HuntGroup165:title:e [color="orange"];
+	HuntGroup165:timeout:w -> BPPMenu:BPPMenu:e [color="orange"];
+	BPPMenu:01:e -> HuntGroup165:title:w [color="red" style="dotted"];
+
+	{rank=same SalesRepMenu AdminMenu};
+	{rank=same StartPCI StartBPP};
+	{rank=same HuntGroup250 HuntGroup165 DayTimeMenu};
+	{rank=same HuntGroup200 NightTimeMenu BPPMenu};
 
 	Recordings [
 		label = "Recordings Menu\nPress *60 on any phone";
@@ -104,14 +174,14 @@ digraph phone_menu {
 	RecordingsOptions [
 		shape = "none";
 		margin = "0";
-		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="3">
-			<tr><td port="1">1</td><td align="left">Day Time Greeting (daytime.wav)</td></tr>
-			<tr><td port="2">2</td><td align="left">Night Time Greeting (nighttime.wav)</td></tr>
-			<tr><td port="3">3</td><td align="left">Sales Reps Menu (submenu1.wav)</td></tr>
-			<tr><td port="4">4</td><td align="left">Administration Menu (submenu2.wav)</td></tr>
-			<tr><td port="5">5</td><td align="left">Boulder Pro Photo Menu (prophoto.wav)</td></tr>
-			<tr><td port="6">6</td><td align="left">Entry? (entry.wav)</td></tr>
-			<tr><td port="9">9</td><td align="left">THIS Recordings Menu (recordings.wav)</td></tr>
+		label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr><td port="1">1</td><td align="left" port="11" bgcolor="lightblue">Day Time Greeting (daytime.wav)</td></tr>
+			<tr><td port="2">2</td><td align="left" port="21" bgcolor="khaki1">Night Time Greeting (nighttime.wav)</td></tr>
+			<tr><td port="3">3</td><td align="left" port="31" bgcolor="palegreen">Sales Reps Menu (submenu1.wav)</td></tr>
+			<tr><td port="4">4</td><td align="left" port="41" bgcolor="plum">Administration Menu (submenu2.wav)</td></tr>
+			<tr><td port="5">5</td><td align="left" port="51" bgcolor="moccasin">Boulder Pro Photo Menu (prophoto.wav)</td></tr>
+			<tr><td port="6">6</td><td align="left" port="61">Entry? (entry.wav)</td></tr>
+			<tr><td port="9">9</td><td align="left" port="91">THIS Recordings Menu (recordings.wav)</td></tr>
 			</table>>;
 	]
 	edge [color="black"];
@@ -122,5 +192,4 @@ digraph phone_menu {
 	Recordings:e -> RecordingsOptions:5;
 	Recordings:e -> RecordingsOptions:6;
 	Recordings:e -> RecordingsOptions:9;
-
 }
